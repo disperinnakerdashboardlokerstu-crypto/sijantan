@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0369a1">
+
+  <title>SI JANTAN - Kota Probolinggo</title>
+
+  <!-- CSS Eksternal -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Cloudflare Turnstile SDK -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- HEADER STICKY -->
+  <header class="header-sticky">
+    <div class="mobile-container header-wrapper">
+      
+      <!-- SISI KIRI -->
+      <div class="header-left">
+        <img src="img/pemkot_probolinggo.webp" alt="Pemkot Probolinggo" class="img-header-left" title="Pemkot Probolinggo">
+        <img src="img/bersolek.webp" alt="Bersolek" class="img-header-left" title="Bersolek">
+        <img src="img/BPJS.png" alt="BPJS Ketenagakerjaan" class="img-header-left" title="BPJS Ketenagakerjaan">
+      </div>
+
+      <!-- SISI KANAN -->
+      <div class="header-right">
+        <div class="header-title-box">
+          <h1 class="header-title">SI JANTAN</h1>
+          <p class="header-subtitle">
+            Informasi BPJS Ketenagakerjaan<br>Pekerja Rentan
+          </p>
+        </div>
+        <img src="img/sijantan.webp" alt="Logo SI JANTAN" class="img-header-right logo-sijantan" title="SI JANTAN">
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Cloudflare Web Analytics -->
+  <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b18d27fbb2ea4fb1b1e0978a8f9664b2"}'></script>
+
+  <!-- CONTENT MAIN -->
+  <main class="mobile-container main-content">
+    
+    <!-- BANNER PENGHORMATAN -->
+    <div class="banner-box">
+      <span class="banner-badge">
+        Program Perlindungan Pekerja Rentan
+      </span>
+      <h2 class="banner-title">Keringat Anda Membangun Kota, Keselamatan Anda Prioritas Kami</h2>
+      <p class="banner-desc">
+        Pemerintah Kota Probolinggo memberikan apresiasi dan rasa aman bagi Petani, Nelayan, dan Pelaku UMKM.
+      </p>
+      
+      <div class="banner-counter-wrapper">
+        <div class="banner-counter-box">
+          <p class="counter-label">Total Pekerja Terlindungi</p>
+          <p class="counter-value">11.260 <span class="counter-unit">Orang</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FITUR 1: CEK STATUS NIK -->
+    <div class="card-box">
+      <div class="card-header">
+        <h3 class="card-title">Cek Status Perlindungan Anda</h3>
+        <p class="card-subtitle">Masukkan 16 digit NIK KTP Anda untuk mengecek status kepesertaan.</p>
+      </div>
+
+      <div class="card-body-gap">
+        <div class="input-wrapper">
+          <img src="img/id_card.svg" alt="ID Card" class="input-icon">
+          <input type="text" id="nikInput" class="custom-input" maxlength="16" placeholder="Masukkan 16 Digit NIK KTP..." autocomplete="off">
+        </div>
+        
+        <div class="turnstile-wrapper">
+          <div id="turnstileNikWidget" class="cf-turnstile" 
+               data-sitekey="0x4AAAAAAD_dsmgTQtdqS6nO" 
+               data-callback="onNikSuccess"
+               data-expired-callback="onNikExpired"></div>
+        </div>
+
+        <p class="shield-info">
+          <img src="img/shield.svg" alt="Shield" class="icon-shield">
+          <span>Terjamin Keamanannya & Terintegrasi dengan BPJS</span>
+        </p>
+
+        <button id="btnCek" class="btn-action">
+          <span>Periksa Status Kepesertaan</span>
+        </button>
+      </div>
+
+      <div id="hasilBox" class="hidden"></div>
+    </div>
+
+    <!-- FITUR PERINGATAN LAPOR & DOWNLOAD FORMULIR BPU -->
+    <div class="banner-warning">
+      <div class="warning-header">
+        <div class="warning-icon-box">
+          <img src="img/warning.svg" alt="Peringatan" class="icon-warning">
+        </div>
+        <div class="warning-content">
+          <h3 class="warning-title">WAJIB LAPOR SEBELUM 2 HARI</h3>
+          <p class="warning-desc">
+            Agar Manfaat bisa diklaim, Pekerja/Ahli Waris <strong>WAJIB</strong> melaporkan kecelakaan kerja sebelum 2x24jam ke :<strong><br>Kantor BPJS Ketenagakerjaan<br>Jl. A. Yani No. 104 Kota Probolinggo.<br></strong>Segera Cetak Kartu Peserta Anda di Kantor BPJS Ketenagakerjaan terdekat Selagi Senggang.
+          </p>
+        </div>
+      </div>
+
+      <a id="linkDrive" 
+         href="https://drive.google.com/drive/folders/1ZIqxnub7G5IsZISqkFag0aOhZ4SVHeeh?usp=drive_link" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         class="btn-download-bpu">
+        <img src="img/download.svg" alt="Download Formulir" class="icon-download-bpu">
+        <span>Pelajari formulir Klaim Disini</span>
+      </a>
+      <p class="warning-note">
+        *JANGAN TAKUT RIBET, <strong>LAPOR SAJA DULU WALAUPUN ANDA BELUM SIAP APA-APA.</strong> JANGAN SAMPAI KEHILANGAN HAK ANDA.
+      </p>
+    </div>
+
+    <!-- FITUR 2: MANFAAT DINAMIS -->
+    <div class="section-gap">
+      <div class="section-header">
+        <h3 class="section-title">Manfaat Perlindungan Program</h3>
+        <div class="section-badge">
+          <img src="img/shield.svg" alt="Shield" class="icon-shield-sm">
+          <span>Terintegrasi BPJS</span>
+        </div>
+      </div>
+
+      <div class="manfaat-card">
+        <div id="manfaatContainer">
+          <p class="loading-text">Memuat informasi manfaat...</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- TOMBOL AI CHAT FLOATING -->
+  <div class="btn-floating-wrapper">
+    <button id="btnToggleChatFloating" class="btn-chat-floating">
+      <div class="chat-icon-circle">
+        <img src="img/cs.svg" alt="CS Logo" class="icon-cs">
+      </div>
+      <span>Tanya SI JANTAN (AI)</span>
+      <span class="blinking-dot"></span>
+    </button>
+  </div>
+
+  <!-- FOOTER MEDSOS FIXED -->
+  <footer class="footer-fixed">
+    <div class="mobile-container">
+      <div class="footer-grid">
+        <a id="linkIg" href="https://www.instagram.com/disperinnakerkotaprob/" target="_blank" rel="noopener noreferrer" class="footer-btn">
+          <img src="img/ig.svg" alt="Instagram" class="footer-icon">
+          <span class="footer-label">Instagram</span>
+        </a>
+
+        <a id="linkFb" href="https://www.facebook.com/pentalasker.disnakerkotaprob/?locale=id_ID" target="_blank" rel="noopener noreferrer" class="footer-btn">
+          <img src="img/fb.svg" alt="Facebook" class="footer-icon">
+          <span class="footer-label">Facebook</span>
+        </a>
+
+        <a id="linkWa" href="https://wa.me/6282140705429?text=Halo%20CS%20SI%20JANTAN,%20saya%20ingin%20bertanya%20mengenai%20status%20BPJS%20Ketenagakerjaan." target="_blank" rel="noopener noreferrer" class="footer-btn footer-btn-wa">
+          <img src="img/wa.svg" alt="WhatsApp CS" class="footer-icon">
+          <span class="footer-label-wa">WA CS</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL CHATBOT AI -->
+  <div id="chatModal" class="hidden modal-overlay">
+    <div class="modal-card">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <div class="modal-icon-circle">
+            <img src="img/cs.svg" alt="CS Logo" class="icon-cs">
+          </div>
+          <div>
+            <p class="modal-title">Asisten SI JANTAN</p>
+            <p class="modal-subtitle">Kecerdasan Buatan - Layanan 24 Jam</p>
+          </div>
+        </div>
+        <button id="btnCloseModal" class="btn-close" aria-label="Tutup Modal">&times;</button>
+      </div>
+
+      <!-- Chat Container -->
+      <div id="chatMessages" class="chat-messages-container">
+        <div class="chat-row-left">
+          <div class="chat-body chat-bubble-ai">
+            Selamat Datang!<br><br>
+            Saya <strong>SI JANTAN</strong>. Dilarang keras memasukkan NIK, No rekening, PIN, Password, Nama, Alamat dan Informasi Pribadi yang bersifat rahasia lainnya ke dalam chat ini. <strong>Silahkan pilih menu di bawah ini :</strong> 
+          </div>
+        </div>
+
+        <!-- DIV PENAMPUNG KHUSUS QUICK REPLIES -->
+        <div id="quickRepliesBox"></div>
+      </div>
+
+      <!-- Input Area & Turnstile -->
+      <div class="modal-footer">
+        <div class="turnstile-chat-box">
+          <div id="turnstileChatWidget" class="cf-turnstile" 
+               data-sitekey="0x4AAAAAAD_dsmgTQtdqS6nO" 
+               data-callback="onChatSuccess"
+               data-expired-callback="onChatExpired"></div>
+        </div>
+
+        <div class="chat-input-wrapper">
+          <input type="text" id="chatInput" maxlength="300" placeholder="Atau ingin bertanya lebih spesifik..." class="chat-input" autocomplete="off">
+          <button id="btnKirimChat" class="btn-send">Kirim</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JavaScript Eksternal -->
+  <script src="scriptv2.js"></script>
+</body>
+</html>
